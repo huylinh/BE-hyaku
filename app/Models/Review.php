@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
+
+    public function store(): BelongsTo
+    {
+        return $this->belongsTo(Store::class, 'store_id');
+    }
+
+    public function history(): BelongsTo
+    {
+        return $this->belongsTo(History::class, 'history_id');
+    }
+
+    public function guest(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'guest_id');
+    }
 }
