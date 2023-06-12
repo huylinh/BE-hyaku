@@ -9,7 +9,7 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $stores = Store::all();
+        $stores = Store::with(['reviews', 'aWorkingDay'])->get();
         return response()->json($stores, 200);
     }
 
@@ -66,5 +66,17 @@ class StoreController extends Controller
         $store = Store::findOrFail($id);
         $store->delete();
         return response()->json(['message' => 'Store deleted successfully'], 200);
+    }
+
+    public function searchTerm($searchTerm)
+    {
+        $stores = Store::where(function ($query) use ($searchTerm) {
+            $query->where('name', 'like', "%{$searchTerm}%")
+                ->orWhere('address', 'like', "%{$searchTerm}%");
+        })
+        ->with(['reviews', 'a_working_day'])
+        ->get();
+
+        return response()->json($stores, 200);
     }
 }
