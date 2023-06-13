@@ -15,7 +15,7 @@ class StoreController extends Controller
 
     public function show($id)
     {
-        $store = Store::findOrFail($id);
+        $store = Store::with(['reviews', 'aWorkingDay'])->findOrFail($id);
         return response()->json($store, 200);
     }
 
@@ -68,13 +68,15 @@ class StoreController extends Controller
         return response()->json(['message' => 'Store deleted successfully'], 200);
     }
 
-    public function searchTerm($searchTerm)
+    public function searchTerm(Request $request)
     {
+        $searchTerm = $request->input('searchTerm');
+
         $stores = Store::where(function ($query) use ($searchTerm) {
             $query->where('name', 'like', "%{$searchTerm}%")
                 ->orWhere('address', 'like', "%{$searchTerm}%");
         })
-        ->with(['reviews', 'a_working_day'])
+        ->with(['reviews', 'aWorkingDay'])
         ->get();
 
         return response()->json($stores, 200);
