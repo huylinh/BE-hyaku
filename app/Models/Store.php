@@ -24,7 +24,7 @@ class Store extends Model
         return $this->hasMany(History::class, 'store_id');
     }
 
-    public function a_working_day(): HasOne
+    public function aWorkingDay(): HasOne
     {
         return $this->hasOne(AWorkingDay::class, 'store_id');
     }
