@@ -7,9 +7,14 @@ use App\Models\Store;
 
 class StoreController extends Controller
 {
-    public function index()
+    public function index($request)
     {
-        $stores = Store::with(['reviews', 'aWorkingDay'])->get();
+        $stores = Store::with(['reviews', 'aWorkingDay'])
+        ->when($request->input('search'), function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('address', 'like', "%{$search}%");
+        })
+        ->get();
         return response()->json($stores, 200);
     }
 
@@ -66,19 +71,5 @@ class StoreController extends Controller
         $store = Store::findOrFail($id);
         $store->delete();
         return response()->json(['message' => 'Store deleted successfully'], 200);
-    }
-
-    public function searchTerm(Request $request)
-    {
-        $searchTerm = $request->input('searchTerm');
-
-        $stores = Store::where(function ($query) use ($searchTerm) {
-            $query->where('name', 'like', "%{$searchTerm}%")
-                ->orWhere('address', 'like', "%{$searchTerm}%");
-        })
-        ->with(['reviews', 'aWorkingDay'])
-        ->get();
-
-        return response()->json($stores, 200);
     }
 }
