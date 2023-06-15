@@ -7,7 +7,7 @@ use App\Models\Store;
 
 class StoreController extends Controller
 {
-    public function index($request)
+    public function index(Request $request)
     {
         $stores = Store::with(['reviews', 'aWorkingDay'])
         ->when($request->input('search'), function ($query, $search) {
