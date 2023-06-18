@@ -12,6 +12,13 @@ class Store extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name', 'address', 'business_hour', 'air_condition', 'parking_lot',
+        'introduction', 'picture', 'owner_id', 'coordinates', 'max_capacity'
+    ];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
