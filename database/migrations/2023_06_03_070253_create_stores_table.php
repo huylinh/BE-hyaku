@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('business_hour');
             $table->boolean('air_condition');
-            $table->boolean('parking-lot');
+            $table->boolean('parking_lot');
             $table->string('introduction')->nullable();
             $table->string('picture')->nullable();
             $table->unsignedBigInteger('owner_id');
