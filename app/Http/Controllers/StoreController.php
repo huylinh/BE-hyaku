@@ -15,7 +15,18 @@ class StoreController extends Controller
                 ->orWhere('address', 'like', "%{$search}%");
         })
         ->get();
-        return response()->json($stores, 200);
+        $storesWithStatus = [];
+        foreach($stores as $store) {
+            $storeWithStatus = $store;
+            if ($store['aWorkingDay']['guests'] >= $store['max_capacity']*2/3) {
+                $storeWithStatus['status'] = false;
+            } else {
+                $storeWithStatus['status'] = true;
+            }
+
+            array_push($storesWithStatus, $storeWithStatus);
+        }
+        return response()->json($storesWithStatus, 200);
     }
 
     public function show($id)
