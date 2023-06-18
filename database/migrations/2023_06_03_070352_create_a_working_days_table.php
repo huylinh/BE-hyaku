@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('guests');
             $table->unsignedBigInteger('owner_id');
             $table->timestamp('updated_time');
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('store_id')->references('id')->on('stores')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
