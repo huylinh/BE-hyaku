@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Store;
+use DateTime;
 
 class StoreController extends Controller
 {
@@ -18,6 +19,27 @@ class StoreController extends Controller
         $storesWithStatus = [];
         foreach($stores as $store) {
             $storeWithStatus = $store;
+            $coordinates = $store['coordinates'];
+            $position = explode(',', $coordinates);
+            $lat = $position[0];
+            $lon = $position[1];
+            $convertedCoordinates = ["latitude" => $lat, "longitude" => $lon];
+            $storeWithStatus['coordinates'] = $convertedCoordinates;
+
+            $open_time_array = explode(" - ", $store['business_hour']);
+            if (count($open_time_array) >= 2) {
+                $start_time = date('H:i', strtotime($open_time_array[0]));
+                $end_time = date('H:i', strtotime($open_time_array[1]));
+                $current_time = date('H:i');
+    
+                if ($current_time > $start_time && $current_time < $end_time) {
+                    $store['isOpen'] = true;
+                    
+                } else {
+                    $store['isOpen'] = false;
+                }
+            }
+
             if ($store['aWorkingDay']['guests'] >= $store['max_capacity']*2/3) {
                 $storeWithStatus['status'] = false;
             } else {
