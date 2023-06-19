@@ -23,7 +23,7 @@ class StoreController extends Controller
             $position = explode(',', $coordinates);
             $lat = $position[0];
             $lon = $position[1];
-            $convertedCoordinates = ["latitude" => $lat, "longtitude" => $lon];
+            $convertedCoordinates = ["latitude" => $lat, "longitude" => $lon];
             $storeWithStatus['coordinates'] = $convertedCoordinates;
 
             $open_time_array = explode(" - ", $store['business_hour']);
