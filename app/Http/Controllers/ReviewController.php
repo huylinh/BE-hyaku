@@ -12,7 +12,7 @@ class ReviewController extends Controller
     {
         // $reviews = Review::join('histories', 'reviews.history_id', '=', 'histories.id')
         // ->get();
-        $reviews = Review::with(['history', 'history.user:id,name'])
+        $reviews = Review::with(['history.user:id,name'])
         ->when($request->input('store_id'), function ($query, $store_id) {
             $query->whereHas('history', function ($query) use ($store_id) {
                 $query->where('store_id', $store_id);
