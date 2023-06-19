@@ -21,4 +21,9 @@ class Review extends Model
     {
         return $this->belongsToThrough(Store::class, History::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsToThrough(User::class, History::class);
+    }
 }

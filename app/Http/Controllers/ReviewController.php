@@ -12,29 +12,14 @@ class ReviewController extends Controller
     {
         // $reviews = Review::join('histories', 'reviews.history_id', '=', 'histories.id')
         // ->get();
-        $reviews =  Review::with(['history'])
+        $reviews = Review::with(['history', 'history.user:id,name'])
+        ->when($request->input('store_id'), function ($query, $store_id) {
+            $query->whereHas('history', function ($query) use ($store_id) {
+                $query->where('store_id', $store_id);
+            });
+        })
         ->get();
 
-        $arr = [
-            'status' => true,
-            'message' => 'Api reviews',
-            'data' => $reviews
-        ];
-        return response()->json($arr, 201);
-    }
-
-    public function getReviewsByStoreId(Request $request, $id_stored)
-    {
-        // $reviews = Review::join('histories', 'reviews.history_id', '=', 'histories.id')
-        $reviews =  Review::with(['history'])
-        ->where('reviews.store_id','=', $id_stored)
-        ->get();
-
-        $arr = [
-            'status' => true,
-            'message' => 'Api get review by store',
-            'data' => $reviews
-        ];
-        return response()->json($arr, 201);
+    return response()->json($reviews, 200);
     }
 }
