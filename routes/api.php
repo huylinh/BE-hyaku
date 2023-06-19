@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
-
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +24,7 @@ Route::get('/stores/{id}', [StoreController::class, 'show']);
 Route::post('/stores', [StoreController::class, 'store']);
 Route::put('/stores/{id}', [StoreController::class, 'update']);
 Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
+
+//Review
+Route::get('/review', [ReviewController::class, 'index']);
+Route::get('/review/{id_store}', [ReviewController::class, 'getReviewsByStoreId']);
