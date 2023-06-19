@@ -10,8 +10,6 @@ class ReviewController extends Controller
 {
     public function index(Request $request)
     {
-        // $reviews = Review::join('histories', 'reviews.history_id', '=', 'histories.id')
-        // ->get();
         $reviews = Review::with(['history.user:id,name'])
         ->when($request->input('store_id'), function ($query, $store_id) {
             $query->whereHas('history', function ($query) use ($store_id) {
