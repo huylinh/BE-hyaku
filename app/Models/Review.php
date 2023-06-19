@@ -10,6 +10,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['stars', 'comment', 'store_id', 'picture', 'history_id'];
+
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class, 'store_id');
