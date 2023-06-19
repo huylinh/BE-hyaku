@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Store;
-use DateTime;
+use Illuminate\Support\Facades\DB;
 
 class StoreController extends Controller
 {
     public function index(Request $request)
     {
         $stores = Store::with(['reviews', 'aWorkingDay'])
+        ->withCount(['reviews as avg_rating' => function ($query) {
+            $query->select(DB::raw('COALESCE(AVG(stars), 0)'));
+        }])
         ->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%")
                 ->orWhere('address', 'like', "%{$search}%");
