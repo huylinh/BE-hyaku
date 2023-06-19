@@ -10,7 +10,7 @@ class StoreController extends Controller
 {
     public function index(Request $request)
     {
-        $stores = Store::with(['reviews', 'aWorkingDay'])
+        $stores = Store::with(['reviews.history.user:id,name', 'aWorkingDay'])
         ->withCount(['reviews as avg_rating' => function ($query) {
             $query->select(DB::raw('COALESCE(AVG(stars), 0)'));
         }])
@@ -56,8 +56,41 @@ class StoreController extends Controller
 
     public function show($id)
     {
-        $store = Store::with(['reviews', 'aWorkingDay'])->findOrFail($id);
-        return response()->json($store, 200);
+        $store = Store::with(['reviews.history.user:id,name', 'aWorkingDay'])
+        ->withCount(['reviews as avg_rating' => function ($query) {
+            $query->select(DB::raw('COALESCE(AVG(stars), 0)'));
+        }])
+        ->findOrFail($id);
+
+        $storeWithStatus = $store;
+            $coordinates = $store['coordinates'];
+            $position = explode(',', $coordinates);
+            $lat = $position[0];
+            $lon = $position[1];
+            $convertedCoordinates = ["latitude" => $lat, "longitude" => $lon];
+            $storeWithStatus['coordinates'] = $convertedCoordinates;
+
+            $open_time_array = explode(" - ", $store['business_hour']);
+            if (count($open_time_array) >= 2) {
+                $start_time = date('H:i', strtotime($open_time_array[0]));
+                $end_time = date('H:i', strtotime($open_time_array[1]));
+                $current_time = date('H:i');
+
+                if ($current_time > $start_time && $current_time < $end_time) {
+                    $store['isOpen'] = true;
+
+                } else {
+                    $store['isOpen'] = false;
+                }
+            }
+
+            if ($store['aWorkingDay']['guests'] >= $store['max_capacity']*2/3) {
+                $storeWithStatus['status'] = false;
+            } else {
+                $storeWithStatus['status'] = true;
+            }
+
+        return response()->json($storeWithStatus, 200);
     }
 
     public function store(Request $request)
