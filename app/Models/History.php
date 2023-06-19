@@ -21,8 +21,8 @@ class History extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function review(): HasOne
+    public function review(): HasMany
     {
-        return $this->hasOne(Review::class, 'history_id');
+        return $this->hasMany(Review::class, 'history_id');
     }
 }
