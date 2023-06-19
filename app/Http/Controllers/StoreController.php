@@ -34,10 +34,10 @@ class StoreController extends Controller
                 $start_time = date('H:i', strtotime($open_time_array[0]));
                 $end_time = date('H:i', strtotime($open_time_array[1]));
                 $current_time = date('H:i');
-    
+
                 if ($current_time > $start_time && $current_time < $end_time) {
                     $store['isOpen'] = true;
-                    
+
                 } else {
                     $store['isOpen'] = false;
                 }

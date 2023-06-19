@@ -12,18 +12,13 @@ class Review extends Model
 
     protected $fillable = ['stars', 'comment', 'store_id', 'picture', 'history_id'];
 
-    public function store(): BelongsTo
-    {
-        return $this->belongsTo(Store::class, 'store_id');
-    }
-
     public function history(): BelongsTo
     {
         return $this->belongsTo(History::class, 'history_id');
     }
 
-    public function guest(): BelongsTo
+    public function store(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'guest_id');
+        return $this->belongsToThrough(Store::class, History::class);
     }
 }
