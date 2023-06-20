@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Store extends Model
@@ -24,11 +25,6 @@ class Store extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class, 'store_id');
-    }
-
     public function histories(): HasMany
     {
         return $this->hasMany(History::class, 'store_id');
@@ -37,5 +33,10 @@ class Store extends Model
     public function aWorkingDay(): HasOne
     {
         return $this->hasOne(AWorkingDay::class, 'store_id');
+    }
+
+    public function reviews(): HasManyThrough
+    {
+        return $this->hasManyThrough(Review::class, History::class);
     }
 }
