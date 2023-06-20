@@ -27,7 +27,7 @@ class History extends Model
     //     return $this->hasOne(Review::class, 'history_id');
     // }
 
-    public function review(): HasMany
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'history_id');
     }
