@@ -11,10 +11,10 @@ class ReviewController extends Controller
     public function store(Request $request) {
         $data = $request->all();
         try {
-            $reviews = Review::created($data);
+            $reviews = Review::create($data);
             return response()->json(['message' => 'success'], 201);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'error'], 400);
+            return response()->json(['message' => $th], 400);
         }
     }
     
