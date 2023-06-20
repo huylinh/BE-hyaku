@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
@@ -24,3 +25,5 @@ Route::get('/stores/{id}', [StoreController::class, 'show']);
 Route::post('/stores', [StoreController::class, 'store']);
 Route::put('/stores/{id}', [StoreController::class, 'update']);
 Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
+
+Route::post('/reviews', [ReviewController::class, 'store']);
