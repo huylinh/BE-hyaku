@@ -17,7 +17,9 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->string('picture')->nullable();
             $table->unsignedBigInteger('history_id');
+            $table->unsignedBigInteger('store_id');
             $table->foreign('history_id')->references('id')->on('histories')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('store_id')->references('id')->on('stores')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

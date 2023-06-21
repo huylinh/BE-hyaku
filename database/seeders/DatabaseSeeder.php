@@ -411,78 +411,91 @@ class DatabaseSeeder extends Seeder
                 'comment' => 'コーヒーがとても美味しいです。おすすめです！',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 1,
+                'store_id' => 1
             ],
             [
                 'stars' => 4,
                 'comment' => '落ち着いた雰囲気でゆったりとくつろげるカフェです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 2,
+                'store_id' => 1
             ],
             [
                 'stars' => 3,
                 'comment' => '朝に利用するのがおすすめです。静かな雰囲気が好きです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 3,
+                'store_id' => 1
             ],
             [
                 'stars' => 3,
                 'comment' => 'ベーカリーと一緒に利用できるのが嬉しいです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 4,
+                'store_id' => 1
             ],
             [
                 'stars' => 4,
                 'comment' => '落ち着いた雰囲気でゆったりとくつろげるカフェです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 5,
+                'store_id' => 2
             ],
             [
                 'stars' => 3,
                 'comment' => '店内のインテリアが素敵で、居心地が良いです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 6,
+                'store_id' => 2
             ],
             [
                 'stars' => 5,
                 'comment' => 'スタッフの接客が素晴らしく、いつも気持ちよく利用しています。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 7,
+                'store_id' => 3
             ],
             [
                 'stars' => 4,
                 'comment' => 'ここのアイスコーヒーは絶品です。一度飲んでみてください！',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 8,
+                'store_id' => 3
             ],
             [
                 'stars' => 3,
                 'comment' => '朝に利用するのがおすすめです。静かな雰囲気が好きです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 9,
+                'store_id' => 3
             ],
             [
                 'stars' => 5,
                 'comment' => '店内の音楽がとてもいいです。くつろげる空間です。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 10,
+                'store_id' => 3
             ],
             [
                 'stars' => 4,
                 'comment' => 'おしゃれなカフェで、写真を撮るのにも最適です。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 11,
+                'store_id' => 1
             ],
             [
                 'stars' => 3,
                 'comment' => 'ベーカリーと一緒に利用できるのが嬉しいです。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 12,
+                'store_id' => 1
             ],
             [
                 'stars' => 5,
                 'comment' => '家族連れにもおすすめのカフェです。子供が楽しめます。',
                 'picture' => 'https://picsum.photos/200/300',
                 'history_id' => 13,
+                'store_id' => 2
             ],
         ];
 
