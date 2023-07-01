@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,6 @@ Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
 
 Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews', [ReviewController::class, 'index']);
+
+Route::post("auth/login", [AuthController::class, 'login']);
+Route::post("auth/register", [AuthController::class, 'register']);

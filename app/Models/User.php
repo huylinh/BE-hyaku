@@ -23,7 +23,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'dob',
+        'role',
+        'phone_num'
     ];
+
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.
