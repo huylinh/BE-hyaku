@@ -5,6 +5,7 @@ use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,9 +27,15 @@ Route::get('/stores/{id}', [StoreController::class, 'show']);
 Route::post('/stores', [StoreController::class, 'store']);
 Route::put('/stores/{id}', [StoreController::class, 'update']);
 Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
+Route::put('/stores/{id}/guests', [StoreController::class, 'updateGuests']);
 
 Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews', [ReviewController::class, 'index']);
 
 Route::post("auth/login", [AuthController::class, 'login']);
 Route::post("auth/register", [AuthController::class, 'register']);
+
+// Route::get('/users', [UserController::class, 'index']);
+// Route::get('/users/{id}', [UserController::class, 'show']);
+Route::put('/users/{id}', [UserController::class, 'update']);
+

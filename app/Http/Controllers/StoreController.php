@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AWorkingDay;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use Illuminate\Support\Facades\DB;
@@ -110,6 +111,12 @@ class StoreController extends Controller
 
         $store = Store::create($validatedData);
 
+        $workingDay = new AWorkingDay();
+        $workingDay->store_id = $store->id;
+        $workingDay->guests = 0;
+        $workingDay->updated_time = now();
+        $workingDay->save();
+
         return response()->json($store, 201);
     }
 
@@ -140,5 +147,15 @@ class StoreController extends Controller
         $store = Store::findOrFail($id);
         $store->delete();
         return response()->json(['message' => 'Store deleted successfully'], 200);
+    }
+
+    public function updateGuests(Request $request, $id)
+    {
+        $store = Store::find($id);
+        $workingDay = $store->aWorkingDay;
+        $workingDay->guests = $request->input('guests');
+        $workingDay->updated_time = now();
+        $workingDay->save();
+        return response()->json(["message" => "Update Success!", "working_day" => $workingDay], 200);
     }
 }
