@@ -9,26 +9,34 @@ use App\Models\History;
 class ReviewController extends Controller
 {
     public function store(Request $request) {
-        $data = $request->all();
+        $validatedData = $request->validate([
+            'stars' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string',
+            'picture' => 'nullable|url',
+            'store_id' => 'required|integer|exists:stores,id',
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+
         try {
-            $reviews = Review::create($data);
+            $review = Review::create($validatedData);
+
+            // Create a new history record
+            History::create([
+                'review_id' => $review->id,
+                'visited_time' => now()
+            ]);
+
             return response()->json(['message' => "success"], 201);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th], 400);
+            return response()->json(['message' => $th->getMessage()], 400);
         }
     }
-    
+
+
     public function index(Request $request)
     {
-        $reviews = Review::with(['history.user:id,name'])
-        ->when($request->input('store_id'), function ($query, $store_id) {
-            // $query->whereHas('history', function ($query) use ($store_id) {
-            //     $query->where('store_id', $store_id);
-            // });
-            $query->where('store_id', $store_id);
-        })
-        ->get();
+        $reviews = Review::with(['history'])->get();
 
-    return response()->json($reviews, 200);
+        return response()->json($reviews, 200);
     }
 }
