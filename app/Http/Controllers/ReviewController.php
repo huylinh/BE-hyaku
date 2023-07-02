@@ -35,8 +35,11 @@ class ReviewController extends Controller
 
     public function index(Request $request)
     {
-        $reviews = Review::with(['history','user:id,name'])->get();
-
+        $reviews = Review::with(['history','user:id,name'])
+        ->when($request->input('store_id'), function ($query, $store_id) {
+            $query->where('store_id', $store_id);
+        })
+        ->get();
         return response()->json($reviews, 200);
     }
 }
