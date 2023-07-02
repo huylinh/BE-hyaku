@@ -53,7 +53,7 @@ class StoreController extends Controller
 
     public function show($id)
     {
-        $store = Store::with(['reviews.user:id,name', 'aWorkingDay'])
+        $store = Store::with(['reviews', 'aWorkingDay'])
         ->withCount(['reviews as avg_rating' => function ($query) {
             $query->select(DB::raw('COALESCE(AVG(stars), 0)'));
         }])
