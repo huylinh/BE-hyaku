@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Store extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
-        'name', 'address', 'business_hour', 'air_condition', 'parking_lot',
-        'introduction', 'picture', 'owner_id', 'coordinates', 'max_capacity'
+        "status", 'name', 'address', 'business_hour', 'air_condition', 'parking_lot',
+        'introduction', 'front_picture', "view_picture", "inside_picture", "ac_picture",
+        "parking_lot_picture", "business_license_pic", 'owner_id', 'coordinates', 'max_capacity', "confirmed_at"
     ];
 
     public function owner(): BelongsTo
@@ -25,18 +23,13 @@ class Store extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function histories(): HasMany
-    {
-        return $this->hasMany(History::class, 'store_id');
-    }
-
     public function aWorkingDay(): HasOne
     {
         return $this->hasOne(AWorkingDay::class, 'store_id');
     }
 
-    public function reviews(): HasManyThrough
+    public function reviews(): HasMany
     {
-        return $this->hasManyThrough(Review::class, History::class);
+        return $this->hasMany(Review::class, "store_id");
     }
 }

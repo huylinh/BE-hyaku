@@ -56,11 +56,6 @@ class User extends Authenticatable
         return $this->hasMany(Store::class, 'owner_id');
     }
 
-    public function histories(): HasMany
-    {
-        return $this->hasMany(History::class, 'user_id');
-    }
-
     public function reviews(): HasManyThrough
     {
         return $this->hasManyThrough(Review::class, History::class);

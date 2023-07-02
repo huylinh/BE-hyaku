@@ -5,30 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class History extends Model
 {
     use HasFactory;
 
-    public function store(): BelongsTo
-    {
-        return $this->belongsTo(Store::class, 'store_id');
-    }
+    protected $fillable = ['review_id', 'visited_time'];
 
-    public function user(): BelongsTo
+    public function review(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    // public function review(): HasOne
-    // {
-    //     return $this->hasOne(Review::class, 'history_id');
-    // }
-
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class, 'history_id');
+        return $this->belongsTo(Review::class, 'review_id');
     }
 }

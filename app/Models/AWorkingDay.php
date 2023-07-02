@@ -11,6 +11,8 @@ class AWorkingDay extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = ['store_id', 'guests', 'updated_time'];
+
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class, 'store_id');
