@@ -41,9 +41,9 @@ class StoreController extends Controller
                 }
             }
             if ($store['aWorkingDay']['guests'] >= $store['max_capacity']*2/3) {
-                $storeWithStatus['status'] = false;
+                $storeWithStatus['isFree'] = false;
             } else {
-                $storeWithStatus['status'] = true;
+                $storeWithStatus['isFree'] = true;
             }
             array_push($storesWithStatus, $storeWithStatus);
         }
