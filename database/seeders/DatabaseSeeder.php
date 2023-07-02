@@ -172,7 +172,7 @@ class DatabaseSeeder extends Seeder
 
         $stores = [
             [
-                "status" => "accepted",
+                "status" => "pending",
                 'name' => 'Juice And Coffee',
                 'address' => 'Kiốt 38 P. Chùa Bộc, Trung Liệt, Đống Đa, Hà Nội, Vietnam',
                 'business_hour' => '2:10pm - 11pm',
@@ -204,7 +204,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "pending",
                 'name' => 'Miffy Coffee',
                 'address' => '58 P. Đặng Văn Ngữ, Phương Liên, Đống Đa, Hà Nội, Vietnam',
                 'business_hour' => '7:30pm - 10pm',
@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "rejected",
                 'name' => 'Stereo Coffee',
                 'address' => '77 P. Tuệ Tĩnh, Lê Đại Hành, Hai Bà Trưng, Hà Nội, Vietnam',
                 'business_hour' => '8am - 10:30pm',
@@ -236,7 +236,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "rejected",
                 'name' => 'Highlands Coffee',
                 'address' => '91 P. Trần Đại Nghĩa, Bách Khoa, Hai Bà Trưng, Hà Nội, Vietnam',
                 'business_hour' => '7am - 10pm',
@@ -268,7 +268,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "rejected",
                 'name' => 'Brobusta Coffee Stand.',
                 'address' => '51 P. Bùi Thị Xuân, Bùi Thị Xuân, Hai Bà Trưng, Hà Nội 11613, Vietnam',
                 'business_hour' => '7:30pm - 11pm',
@@ -284,7 +284,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "pending",
                 'name' => 'The Coffee House',
                 'address' => '122 P. Bùi Thị Xuân, Bùi Thị Xuân, Hai Bà Trưng, Hà Nội 100000, Vietnam',
                 'business_hour' => '7am - 7pm',
@@ -300,7 +300,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "rejected",
                 'name' => 'Sunrise Coffee & Dessert',
                 'address' => 'Kiốt 38 P. Chùa Bộc, Trung Liệt, Đống Đa, Hà Nội, Vietnam',
                 'business_hour' => '7am - 11pm',
