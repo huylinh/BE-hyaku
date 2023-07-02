@@ -99,13 +99,18 @@ class StoreController extends Controller
             'air_condition' => 'required|boolean',
             'parking_lot' => 'required|boolean',
             'introduction' => 'nullable|string',
-            'picture' => 'nullable|url',
             'owner_id' => 'required|integer',
             'coordinates' => 'required|string',
             'max_capacity' => 'required|integer',
+            'front_picture' => 'nullable|url',
+            'view_picture' => 'nullable|url',
+            'inside_picture' => 'nullable|url',
+            'ac_picture' => 'nullable|url',
+            'parking_lot_picture' => 'nullable|url',
+            'business_license_pic' => 'nullable|url'
         ]);
 
-        $store = Store::create($validatedData);
+        $store = Store::create(array_merge($validatedData, ['status' => 'pending']));
 
         $workingDay = new AWorkingDay();
         $workingDay->store_id = $store->id;
@@ -127,10 +132,15 @@ class StoreController extends Controller
             'air_condition' => 'required|boolean',
             'parking_lot' => 'required|boolean',
             'introduction' => 'nullable|string',
-            'picture' => 'nullable|url',
             'owner_id' => 'required|integer',
             'coordinates' => 'required|string',
             'max_capacity' => 'required|integer',
+            'front_picture' => 'nullable|url',
+            'view_picture' => 'nullable|url',
+            'inside_picture' => 'nullable|url',
+            'ac_picture' => 'nullable|url',
+            'parking_lot_picture' => 'nullable|url',
+            'business_license_pic' => 'nullable|url'
         ]);
 
         $store->update($validatedData);
@@ -153,5 +163,30 @@ class StoreController extends Controller
         $workingDay->updated_time = now();
         $workingDay->save();
         return response()->json(["message" => "Update Success!", "working_day" => $workingDay], 200);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $store = Store::find($id);
+
+        if (!$store) {
+            return response()->json(['error' => 'Store not found'], 404);
+        }
+
+        if ($store->status != 'pending') {
+            return response()->json(['error' => "Can't update this store because it had already been accepted or rejected"], 400);
+        }
+
+        $validatedData = $request->validate([
+            'status' => 'required|in:accepted,rejected'
+        ]);
+
+        if (in_array($validatedData['status'], ['accepted', 'rejected'])) {
+            $validatedData['confirmed_at'] = now();
+        }
+
+        $store->update($validatedData);
+
+        return response()->json($store, 200);
     }
 }
