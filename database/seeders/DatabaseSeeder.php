@@ -236,7 +236,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "rejected",
+                "status" => "pending",
                 'name' => 'Highlands Coffee',
                 'address' => '91 P. Trần Đại Nghĩa, Bách Khoa, Hai Bà Trưng, Hà Nội, Vietnam',
                 'business_hour' => '7am - 10pm',
@@ -252,7 +252,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "pending",
                 'name' => 'Highland Coffee',
                 'address' => '191 P. Bà Triệu, Lê Đại Hành, Hai Bà Trưng, Hà Nội, Vietnam',
                 'business_hour' => '7am - 10pm',
@@ -316,7 +316,7 @@ class DatabaseSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "status" => "accepted",
+                "status" => "pending",
                 'name' => 'Coffee and Tea 294',
                 'address' => '294 P. Lê Trọng Tấn, Khương Mai, Thanh Xuân, Hà Nội, Vietnam',
                 'business_hour' => '7am - 11pm',
