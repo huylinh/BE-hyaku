@@ -34,8 +34,8 @@ Route::patch('/stores/{id}/status', [StoreController::class, 'updateStatus']);
 Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews', [ReviewController::class, 'index']);
 
-Route::post("auth/login", [AuthController::class, 'login']);
-Route::post("auth/register", [AuthController::class, 'register']);
+Route::post("/auth/login", [AuthController::class, 'login']);
+Route::post("/auth/register", [AuthController::class, 'register']);
 
 // Route::get('/users', [UserController::class, 'index']);
 // Route::get('/users/{id}', [UserController::class, 'show']);
