@@ -189,4 +189,13 @@ class StoreController extends Controller
 
         return response()->json($store, 200);
     }
+
+    public function showRequest(Request $request, $id){
+        $store = Store::find($id);
+        if(isset($store)){
+            return response()->json($store, 200);
+        }else{
+            return response()->json(404);
+        }
+    }
 }
