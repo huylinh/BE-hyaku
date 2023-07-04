@@ -18,6 +18,8 @@ class StoreController extends Controller
         ->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%")
                 ->orWhere('address', 'like', "%{$search}%");
+        })->when($request->input('user_id'), function ($query, $user_id) {
+            $query->where('owner_id', '=', $user_id);
         })
         ->get();
         $storesWithStatus = [];
