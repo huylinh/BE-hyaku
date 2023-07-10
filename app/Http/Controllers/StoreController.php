@@ -15,6 +15,9 @@ class StoreController extends Controller
         ->withCount(['reviews as avg_rating' => function ($query) {
             $query->select(DB::raw('COALESCE(AVG(stars), 0)'));
         }])
+        ->when($request->input('isAccept'), function ($query) {
+            $query->where('status', '=', 'accepted');
+        })
         ->when($request->input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%")
                 ->orWhere('address', 'like', "%{$search}%");
