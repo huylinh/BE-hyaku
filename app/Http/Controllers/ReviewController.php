@@ -8,7 +8,8 @@ use App\Models\History;
 
 class ReviewController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validatedData = $request->validate([
             'stars' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string',
@@ -35,11 +36,11 @@ class ReviewController extends Controller
 
     public function index(Request $request)
     {
-        $reviews = Review::with(['history','user:id,name'])
-        ->when($request->input('store_id'), function ($query, $store_id) {
-            $query->where('store_id', $store_id);
-        })
-        ->get();
+        $reviews = Review::with(['history', 'user'])
+            ->when($request->input('store_id'), function ($query, $store_id) {
+                $query->where('store_id', $store_id);
+            })
+            ->get();
         return response()->json($reviews, 200);
     }
 }
