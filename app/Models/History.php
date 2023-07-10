@@ -11,6 +11,7 @@ class History extends Model
     use HasFactory;
 
     protected $fillable = ['review_id', 'visited_time'];
+    public $timestamps = false;
 
     public function review(): BelongsTo
     {
