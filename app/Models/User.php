@@ -25,7 +25,8 @@ class User extends Authenticatable
         'gender',
         'dob',
         'role',
-        'phone_num'
+        'phone_num',
+        'nationality'
     ];
 
     public $timestamps = false;
