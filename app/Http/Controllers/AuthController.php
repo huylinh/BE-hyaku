@@ -24,9 +24,8 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
-        $user = $request->all();
-        $user = array_merge($user, ["password" => Hash::make($user["password"])]);
-        $user = User::create($user);
+        $user = User::create($request->all());
+        $user = array_merge($user->toArray(), ["password" => Hash::make($user["password"])]);
         return response()->json(["message" => "Register Success!", "user" => $user], 201);
     }
 }
